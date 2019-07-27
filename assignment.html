@@ -1,0 +1,43 @@
+
+<p>Please type any number</p>
+<input type="number" id="number"/>
+<button id="button" >Guess</button>
+<div id="result"></div>
+    <h3>Past guesses</h3>
+
+<div id="past_guesses">
+</div>
+<script>
+var count=10;
+var sPast_guesses="";
+var finalNumber=Math.ceil(Math.random()*100)
+var button=document.getElementById('button')
+var result=document.getElementById("result")
+var past_guesses=document.getElementById("past_guesses")
+button.addEventListener('click',()=>{
+
+    var yourInput=document.getElementById("number").value;
+
+if(yourInput==finalNumber){
+    result.innerHTML="Success"
+    result.style.backgroundColor="green"
+    alert("Success! The game is will restart after 10 second")
+    setTimeout(()=>{ location.reload()},10000)
+}
+else if(yourInput!=finalNumber){
+    count--;
+    result.style.backgroundColor="red";
+    sPast_guesses+=yourInput+"</br>";   
+    past_guesses.innerHTML="<p >" +sPast_guesses +"</p>";
+    if(yourInput>finalNumber)
+       result.innerHTML="Fail. Its too hight. You have "+count+" times";
+    else 
+        result.innerHTML="Fail. Its too low. You have "+count+" times";
+}
+if(count==0){
+    alert("My result is"+finalNumber+". Lets play again");
+    location.reload();
+}
+});
+
+</script>
